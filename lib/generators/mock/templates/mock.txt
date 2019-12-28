@@ -1,18 +1,17 @@
 import { Request, Response } from 'express';
 import { parse } from 'url';
-import { <%=camelTableNameUF%>Item, <%=camelTableNameUF%>ListParams } from '../src/service/<%=camelTableName%>.d';
-import { getRandomNumber, isInNumberArray } from '@/utils/Wk/tools'
+import { <%=camelTableNameUF%>Item, <%=camelTableNameUF%>ListParams } from '../src/services/<%=camelTableName%>.d';
+import { isInNumberArray } from '@/utils/Wk/tools'
 
 let <%=camelTableName%>ListDataSource: <%=camelTableNameUF%>Item[] = [];
 
 for (let i = 1; i < 30; i += 1) {
   <%=camelTableName%>ListDataSource.push({
       <% for(let j=0;j<fields.length;j++){ %><%=fields[j].camelColumnName%>: <%-fields[j].defaultValue%>,
-      <% } %>
-      <%=pri%>: i,
+      <%_ } %>
   });
+  <%=camelTableName%>ListDataSource[i - 1].id = i;
 }
-
 
 function query<%=camelTableNameUF%>ById(req: Request, res: Response) {
   const <%=pri%>:number = Number(req.query.<%=pri%>)
@@ -78,10 +77,6 @@ function query<%=camelTableNameUF%>(req: Request, res: Response, u: string) {
     }
     return prev[s[0]] - next[s[0]];
   });
-
-
-
-
 
   let pageSize = 10;
   if (params.pageSize) {
