@@ -1,0 +1,122 @@
+import { Request, Response } from 'express';
+import { parse } from 'url';
+import { <%=camelTableNameUF%>Item, <%=camelTableNameUF%>ListParams } from '../src/service/<%=camelTableName%>.d';
+import { getRandomNumber, isInNumberArray } from '@/utils/Wk/tools'
+
+let <%=camelTableName%>ListDataSource: <%=camelTableNameUF%>Item[] = [];
+
+for (let i = 1; i < 30; i += 1) {
+  <%=camelTableName%>ListDataSource.push({
+      <% for(let j=0;j<fields.length;j++){ %><%=fields[j].camelColumnName%>: <%-fields[j].defaultValue%>,
+      <% } %>
+      <%=pri%>: i,
+  });
+}
+
+
+function query<%=camelTableNameUF%>ById(req: Request, res: Response) {
+  const <%=pri%>:number = Number(req.query.<%=pri%>)
+  const result:<%=camelTableNameUF%>Item = <%=camelTableName%>ListDataSource.filter(item => item.<%=pri%> === <%=pri%>)[0]
+  setTimeout(() => res.json(result), 1000);
+}
+
+function update<%=camelTableNameUF%>(req: Request, res: Response) {
+  const newItem:<%=camelTableNameUF%>Item = <<%=camelTableNameUF%>Item>req.body;
+  if (!newItem.<%=pri%> || newItem.<%=pri%> === 0) {
+    let maxSgId:number = 0;
+    <%=camelTableName%>ListDataSource.forEach(v => {
+      if (v.<%=pri%> > maxSgId) {
+        maxSgId = v.<%=pri%>;
+      }
+    });
+    newItem.<%=pri%> = maxSgId + 1;
+    <%=camelTableName%>ListDataSource.push(newItem);
+  } else {
+    if (newItem.<%=pri%> === 3) {
+      return res.status(500).json({
+        status: 500,
+        error: 'Bad Request',
+        message: '参数无效',
+        code: 30101,
+        path: '/result/exception',
+        exception: 'com.wukong.core.exceptions.BusinessException',
+        errors: {
+          name: '长度需要在6和50之间',
+          email: '不是一个合法的电子邮件地址',
+        },
+        timestamp: '2018-05-31T09:41:16.461+0000',
+      });
+    }
+    for (let i:number = 0; i < <%=camelTableName%>ListDataSource.length; i += 1) {
+        if (<%=camelTableName%>ListDataSource[i].<%=pri%> === newItem.<%=pri%>) {
+          <%=camelTableName%>ListDataSource[i] = {
+            ...<%=camelTableName%>ListDataSource[i],
+            ...newItem,
+          };
+          break;
+        }
+    }
+  }
+  return res.json(newItem.<%=pri%>);
+}
+
+
+function query<%=camelTableNameUF%>(req: Request, res: Response, u: string) {
+  let url = u;
+  if (!url || Object.prototype.toString.call(url) !== '[object String]') {
+    // eslint-disable-next-line prefer-destructuring
+    url = req.url;
+  }
+
+  let dataSource = <%=camelTableName%>ListDataSource.concat();
+  const params = (parse(url, true).query as unknown) as <%=camelTableNameUF%>ListParams;
+
+  const s = params.sorter.split('_');
+  dataSource = dataSource.sort((prev, next) => {
+    if (s[1] === 'descend') {
+      return next[s[0]] - prev[s[0]];
+    }
+    return prev[s[0]] - next[s[0]];
+  });
+
+
+
+
+
+  let pageSize = 10;
+  if (params.pageSize) {
+    pageSize = parseInt(`${params.pageSize}`, 0);
+  }
+
+  const result = {
+    list: dataSource,
+    pagination: {
+      total: dataSource.length,
+      pageSize,
+      current: parseInt(`${params.currentPage}`, 10) || 1,
+    },
+  };
+  return res.json(result);
+}
+
+
+function deleteOne<%=camelTableNameUF%>(req: Request, res: Response) {
+  const { <%=pri%> } = req.body;
+  <%=camelTableName%>ListDataSource = <%=camelTableName%>ListDataSource.filter(item => <%=pri%> !== item.<%=pri%>);
+  return res.json(1);
+}
+
+function deleteMany<%=camelTableNameUF%>(req: Request, res: Response) {
+  const { <%=pri%>s } = req.body;
+  <%=camelTableName%>ListDataSource = <%=camelTableName%>ListDataSource.filter(item => !isInNumberArray(<%=pri%>s, item.<%=pri%>));
+  return res.json(1);
+}
+
+
+export default {
+  'GET <%=apiBasePath%>query<%=camelTableNameUF%>ById': query<%=camelTableNameUF%>ById,
+  'GET <%=apiBasePath%>query<%=camelTableNameUF%>': query<%=camelTableNameUF%>,
+  'POST <%=apiBasePath%>deleteOne<%=camelTableNameUF%>': deleteOne<%=camelTableNameUF%>,
+  'POST <%=apiBasePath%>deleteMany<%=camelTableNameUF%>': deleteMany<%=camelTableNameUF%>,
+  'POST <%=apiBasePath%>update<%=camelTableNameUF%>': update<%=camelTableNameUF%>,
+};

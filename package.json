@@ -1,5 +1,5 @@
 {
-  "name": "wukong-cli",
+  "name": "ant-g",
   "version": "1.0.0",
   "description": "Creates antDesignPro code using the command line.",
   "main": "index.js",
@@ -14,6 +14,7 @@
     "index.js",
     "lib"
   ],
+  "exclude": ["src","mock"],
   "bin": {
     "ant-g": "cli.js"
   },
