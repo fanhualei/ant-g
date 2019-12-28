@@ -1,0 +1,16 @@
+{
+  "actionLog": {
+    "tableName": "as_action_log",
+    "pri": "id",
+    "fields": [
+      {
+        "columnName": "id",
+        "dataType": "int",
+        "isNullable": true,
+        "columnComment": "编号",
+        "columnKey": true
+      }
+    ]
+
+  }
+}

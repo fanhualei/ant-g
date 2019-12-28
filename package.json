@@ -1,0 +1,44 @@
+{
+  "name": "wukong-cli",
+  "version": "1.0.0",
+  "description": "Creates antDesignPro code using the command line.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "files": [
+    "cli.js",
+    "index.js",
+    "lib"
+  ],
+  "bin": {
+    "ant-g": "cli.js"
+  },
+  "dependencies": {
+    "ali-rds": "^3.3.0",
+    "chalk": "^2.4.2",
+    "clipboardy": "^2.1.0",
+    "co": "^4.6.0",
+    "debug": "^4.1.1",
+    "execa": "^1.0.0",
+    "fs-extra": "^8.0.1",
+    "glob": "^7.1.4",
+    "inquirer": "^6.4.1",
+    "mkdirp": "^0.5.1",
+    "prettier": "^1.17.0",
+    "semver": "^6.1.0",
+    "sort-package-json": "^1.22.1",
+    "sylvanas": "~0.2.0",
+    "yargs-parser": "^13.1.1",
+    "yeoman-generator": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.19",
+    "coffee": "^5.2.1",
+    "mm": "^2.5.0",
+    "np": "^5.0.1"
+  }
+}
