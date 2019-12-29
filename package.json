@@ -1,6 +1,6 @@
 {
   "name": "ant-g",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "Creates antDesignPro code using the command line.",
   "bin": {
     "ant-g": "cli.js"

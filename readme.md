@@ -29,19 +29,32 @@ yarn add ant-g
 ```shell
 $ ant-g
 ? Select the boilerplate type (Use arrow keys)
-> init            - Create g-config.json config file for generator.
-  dependencies    - Add dependencies to the project
-  service         - Create service and data.d from db .
-  mock            - Create mock from db .
-  exit            - exit the program
+> init                      - Create g-config.json config file for generator.
+  initDataStructure         - Create data structure file from database, this file save /.g dir .
+  dependencies              - Add dependencies to the project
+  service                   - Create service and data.d from db .
+  mock                      - Create mock from db .
+  pageConfig                - Create page config file for generator page
+  pageGenerate              - Create page from config file.
+
 
 ```
 
 
 
-## 2.1 init
+## step1: Defining database structures
 
-在根目录生成`g-config.josn` 代码，用来配置要生成的代码。
+跟后端商量好了数据库的存储结构，并生成数据库。假设要生成的数据库如下:
+
+```sql
+
+```
+
+
+
+## step2:  exec init command
+
+在根目录生成`g-config.josn` 代码，你需要配置相关的内容
 
 ```json
 {
@@ -99,35 +112,53 @@ $ ant-g
 
 
 
-## 2.2 dependencies
+## step3: exec initDataStructure command
 
-将用到的组件与函数，复制到`components` 与`utils`的`Wk`目录下。 这些代码今后会简化开发。
+这个命令会根据数据库的结构，生成这么`.g/dataStructure.json`。 后面的程序会利用这个文件来生成后续的脚本。
+
+你可以根据自己的需要修改这个文件，重新执行`initDataStructure `会备份你修改的文件，并且根据数据库生成新的文件。
 
 
 
-## 2.3 service
+## step4 exec dependencies command
+
+一些公用的组件与函数，复制到`components` 与`utils`的`Wk`目录下，简化今后开发。
+
+
+
+## step5 exec service command
 
 生成`service`与`data.d` 代码，统一放在`src/service`目录下。
 
 
 
-## 2.4 mock
+## step6 exec mock command
 
 生成`mock`代码，统一放在`mock`目录下。
 
 
 
-## 2.5 exit
+## step7 exec pageConfig command
 
-退出应用程序
-
-
-
-# 3. FAQ
+这个命令用来生成`pageConfig`文件，你可以修改这个文件的内容，因为后续的操作，会根据这个文件来生成相应的代码
 
 
 
+## step8 exec pageGenrate command
+
+输入`文件名`，可以根据这个文件名来生成相应的页面代码。
 
 
-# 4. Others
+
+# 4. FAQ
+
+
+
+
+
+# 5. Change Logs
+
+* 对新生成的代码进行格式化
+* 完善pageCofig 文件的自动生成
+* list 页码的大小
 

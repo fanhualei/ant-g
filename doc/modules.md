@@ -122,6 +122,8 @@ mkdirp('/a/b/c/d', function (err) {
 
 ## 1.5 Inquirer
 
+https://github.com/SBoudrias/Inquirer.js/blob/master/README.md
+
 [NodeJs交互式命令行工具Inquirer.js](https://www.jianshu.com/p/db8294cfa2f7)
 
 它是非常容易去处理以下几种事情的：
