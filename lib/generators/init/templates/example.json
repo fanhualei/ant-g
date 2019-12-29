@@ -1,0 +1,7 @@
+{
+  "name": "storeGrade",
+  "path": "/store/storeGrade/",
+  "component": "./store/storeGrade/list",
+  "dataSource": "storeGrade",
+  "pageType": ""
+}

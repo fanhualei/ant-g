@@ -153,6 +153,7 @@ clipboardy.readSync();
 
 - [使用 yeoman-generator 生成脚手架](https://hateonion.me/posts/18dec17/)
 - [官方网站](https://yeoman.io/authoring/)
+- [mem-fs-editor内存文件管理](https://github.com/sboudrias/mem-fs-editor)
 
 
 
@@ -188,7 +189,7 @@ class extends Generator {
 
 
 
-### ejs模板文件
+### ③ ejs模板文件
 
 https://ejs.bootcss.com/
 

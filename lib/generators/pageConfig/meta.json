@@ -1,0 +1,14 @@
+{
+  "description": "Create page config file for generator page",
+  "pageTypes": [
+    {
+      "name": "simple",
+      "description": "一个完整的模块，包含一个列表页，一个单独的编辑页"
+    },
+    {
+      "name": "tabs",
+      "description": "一个页面中包含多个tab,每个tab都是一个模块"
+    }
+
+  ]
+}

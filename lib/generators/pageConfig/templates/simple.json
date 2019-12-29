@@ -1,0 +1,18 @@
+{
+  "pageType": "",
+  "menu": {
+    "path": "",
+    "name": "",
+    "dir": "",
+    "hideInMenu": false
+  },
+  "title": "",
+  "dataSource": "",
+  "listPage": {
+    "searchFields": [],
+    "gridFields": []
+  },
+  "editPage": {
+    "editFields": []
+  }
+}
