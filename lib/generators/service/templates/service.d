@@ -6,8 +6,8 @@ export const default<%=camelTableNameUF%>Item:<%=camelTableNameUF%>Item = {
 <% } %>
 }
 
-export async function query<%=camelTableNameUF%>ById(<%=pri%>: number) {
-  return request(`<%=apiBasePath%>query<%=camelTableNameUF%>ById?<%=pri%>=${<%=pri%>}`);
+export async function query<%=camelTableNameUF%>ById(<%=primaryKey%>: number) {
+  return request(`<%=apiBasePath%>query<%=camelTableNameUF%>ById?<%=primaryKey%>=${<%=primaryKey%>}`);
 }
 
 export async function query<%=camelTableNameUF%>(params: <%=camelTableNameUF%>ListParams) {
@@ -16,7 +16,7 @@ export async function query<%=camelTableNameUF%>(params: <%=camelTableNameUF%>Li
   });
 }
 
-export async function deleteOne<%=camelTableNameUF%>(params: {<%=pri%>:number}) {
+export async function deleteOne<%=camelTableNameUF%>(params: {<%=primaryKey%>:number}) {
   return request('<%=apiBasePath%>deleteOne<%=camelTableNameUF%>', {
     method: 'POST',
     data: {
@@ -25,7 +25,7 @@ export async function deleteOne<%=camelTableNameUF%>(params: {<%=pri%>:number}) 
   });
 }
 
-export async function deleteMany<%=camelTableNameUF%>(params: {<%=pri%>s:string}) {
+export async function deleteMany<%=camelTableNameUF%>(params: {<%=primaryKey%>s:string}) {
   return request('<%=apiBasePath%>deleteMany<%=camelTableNameUF%>', {
     method: 'POST',
     data: {

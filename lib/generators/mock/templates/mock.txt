@@ -14,24 +14,24 @@ for (let i = 1; i < 30; i += 1) {
 }
 
 function query<%=camelTableNameUF%>ById(req: Request, res: Response) {
-  const <%=pri%>:number = Number(req.query.<%=pri%>)
-  const result:<%=camelTableNameUF%>Item = <%=camelTableName%>ListDataSource.filter(item => item.<%=pri%> === <%=pri%>)[0]
+  const <%=primaryKey%>:number = Number(req.query.<%=primaryKey%>)
+  const result:<%=camelTableNameUF%>Item = <%=camelTableName%>ListDataSource.filter(item => item.<%=primaryKey%> === <%=primaryKey%>)[0]
   setTimeout(() => res.json(result), 1000);
 }
 
 function update<%=camelTableNameUF%>(req: Request, res: Response) {
   const newItem:<%=camelTableNameUF%>Item = <<%=camelTableNameUF%>Item>req.body;
-  if (!newItem.<%=pri%> || newItem.<%=pri%> === 0) {
+  if (!newItem.<%=primaryKey%> || newItem.<%=primaryKey%> === 0) {
     let maxSgId:number = 0;
     <%=camelTableName%>ListDataSource.forEach(v => {
-      if (v.<%=pri%> > maxSgId) {
-        maxSgId = v.<%=pri%>;
+      if (v.<%=primaryKey%> > maxSgId) {
+        maxSgId = v.<%=primaryKey%>;
       }
     });
-    newItem.<%=pri%> = maxSgId + 1;
+    newItem.<%=primaryKey%> = maxSgId + 1;
     <%=camelTableName%>ListDataSource.push(newItem);
   } else {
-    if (newItem.<%=pri%> === 3) {
+    if (newItem.<%=primaryKey%> === 3) {
       return res.status(500).json({
         status: 500,
         error: 'Bad Request',
@@ -47,7 +47,7 @@ function update<%=camelTableNameUF%>(req: Request, res: Response) {
       });
     }
     for (let i:number = 0; i < <%=camelTableName%>ListDataSource.length; i += 1) {
-        if (<%=camelTableName%>ListDataSource[i].<%=pri%> === newItem.<%=pri%>) {
+        if (<%=camelTableName%>ListDataSource[i].<%=primaryKey%> === newItem.<%=primaryKey%>) {
           <%=camelTableName%>ListDataSource[i] = {
             ...<%=camelTableName%>ListDataSource[i],
             ...newItem,
@@ -56,7 +56,7 @@ function update<%=camelTableNameUF%>(req: Request, res: Response) {
         }
     }
   }
-  return res.json(newItem.<%=pri%>);
+  return res.json(newItem.<%=primaryKey%>);
 }
 
 
@@ -96,14 +96,14 @@ function query<%=camelTableNameUF%>(req: Request, res: Response, u: string) {
 
 
 function deleteOne<%=camelTableNameUF%>(req: Request, res: Response) {
-  const { <%=pri%> } = req.body;
-  <%=camelTableName%>ListDataSource = <%=camelTableName%>ListDataSource.filter(item => <%=pri%> !== item.<%=pri%>);
+  const { <%=primaryKey%> } = req.body;
+  <%=camelTableName%>ListDataSource = <%=camelTableName%>ListDataSource.filter(item => <%=primaryKey%> !== item.<%=primaryKey%>);
   return res.json(1);
 }
 
 function deleteMany<%=camelTableNameUF%>(req: Request, res: Response) {
-  const { <%=pri%>s } = req.body;
-  <%=camelTableName%>ListDataSource = <%=camelTableName%>ListDataSource.filter(item => !isInNumberArray(<%=pri%>s, item.<%=pri%>));
+  const { <%=primaryKey%>s } = req.body;
+  <%=camelTableName%>ListDataSource = <%=camelTableName%>ListDataSource.filter(item => !isInNumberArray(<%=primaryKey%>s, item.<%=primaryKey%>));
   return res.json(1);
 }
 
