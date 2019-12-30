@@ -15,9 +15,8 @@
 
 
 ```shell
-npm i ant-g
-# or
-yarn add ant-g
+# 一定要 -g 不然运行不了
+npm i -g ant-g
 ```
 
 
@@ -47,7 +46,67 @@ $ ant-g
 跟后端商量好了数据库的存储结构，并生成数据库。假设要生成的数据库如下:
 
 ```sql
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `phoenix` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
+USE `phoenix`;
+
+--
+-- Table structure for table `as_action_log`
+--
+
+DROP TABLE IF EXISTS `as_action_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `as_action_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `long_time` bigint(20) unsigned NOT NULL COMMENT '访问时间',
+  `time` datetime DEFAULT NULL COMMENT '发生时间',
+  `log_day` varchar(20) NOT NULL COMMENT '访问日期',
+  `app_name` varchar(50) NOT NULL DEFAULT '' COMMENT '应用编码',
+  `url` varchar(2000) DEFAULT NULL COMMENT 'url',
+  `ip` varchar(50) NOT NULL COMMENT 'IP',
+  `controller` varchar(50) NOT NULL DEFAULT '',
+  `action` varchar(50) NOT NULL DEFAULT '',
+  `method` varchar(50) NOT NULL DEFAULT '',
+  `url_para` varchar(1000) DEFAULT '',
+  `user` varchar(500) DEFAULT '',
+  `user_agent` varchar(500) DEFAULT '',
+  `refer` varchar(1000) DEFAULT '',
+  `parameters` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1403 DEFAULT CHARSET=utf8 COMMENT='Action日志';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `as_action_log`
+--
+
+LOCK TABLES `as_action_log` WRITE;
+/*!40000 ALTER TABLE `as_action_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `as_action_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `as_activity`
+--
+
+DROP TABLE IF EXISTS `as_activity`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `as_activity` (
+  `activity_id` mediumint(9) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `activity_title` varchar(255) NOT NULL COMMENT '标题',
+  `activity_type` enum('1','2') DEFAULT NULL COMMENT '活动类型 1:商品 2:团购',
+  `activity_banner` varchar(255) NOT NULL COMMENT '活动横幅大图片',
+  `activity_style` varchar(255) NOT NULL COMMENT '活动页面模板样式标识码',
+  `activity_desc` varchar(1000) NOT NULL COMMENT '描述',
+  `activity_start_date` datetime NOT NULL COMMENT '开始时间',
+  `activity_end_date` datetime NOT NULL COMMENT '结束时间',
+  `activity_sort` tinyint(2) unsigned NOT NULL DEFAULT '255' COMMENT '排序',
+  `activity_state` tinyint(2) unsigned NOT NULL DEFAULT '1' COMMENT '活动状态 0为关闭 1为开启',
+  PRIMARY KEY (`activity_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='活动表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 ```
 
 
@@ -159,6 +218,8 @@ $ ant-g
 # 5. Change Logs
 
 * 对新生成的代码进行格式化
+
 * 完善pageCofig 文件的自动生成
-* list 页码的大小
+
+  
 
