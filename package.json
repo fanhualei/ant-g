@@ -1,7 +1,7 @@
 {
   "name": "ant-g",
   "version": "0.9.5",
-  "description": "Creates antDesignPro code using the command line.",
+  "description": "antDesignPro辅助代码生成器",
   "bin": {
     "ant-g": "cli.js"
   },
@@ -9,10 +9,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["antDesignPro","cli","antDesign","脚手架"],
+  "keywords": [
+    "antDesignPro",
+    "cli",
+    "antDesign",
+    "脚手架"
+  ],
   "author": "fanhl [fanhl@189.cn]",
   "license": "ISC",
-  "description": "antDesignPro辅助代码生成器",
   "homepage": "https://github.com/fanhualei/ant-g",
   "repository": {
     "type": "git",
@@ -23,7 +27,10 @@
     "index.js",
     "lib"
   ],
-  "exclude": ["src","mock"],
+  "exclude": [
+    "src",
+    "mock"
+  ],
   "dependencies": {
     "ali-rds": "^3.3.0",
     "chalk": "^2.4.2",
@@ -32,8 +39,11 @@
     "debug": "^4.1.1",
     "execa": "^1.0.0",
     "fs-extra": "^8.0.1",
+    "fuzzy": "^0.1.3",
     "glob": "^7.1.4",
     "inquirer": "^6.4.1",
+    "inquirer-autocomplete-prompt": "^1.0.1",
+    "lodash": "^4.17.15",
     "mkdirp": "^0.5.1",
     "prettier": "^1.17.0",
     "semver": "^6.1.0",
