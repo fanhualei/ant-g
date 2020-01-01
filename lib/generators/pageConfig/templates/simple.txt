@@ -1,0 +1,17 @@
+{
+  "pageType": "<%=pageType%>",
+  "menu": {
+    "path": "<%=path%>",
+    "name": "<%=dataSource%>",
+    "dir": "<%=dir%>",
+  },
+  "title": "<%=dataSource%>",
+  "dataSource": "<%=dataSource%>",
+  "listPage": {
+    "searchFields": <%-JSON.stringify(searchFields)%>,
+    "gridFields": <%-JSON.stringify(gridFields)%>
+  },
+  "editPage": {
+    "editFields": <%-JSON.stringify(editFields)%>
+  }
+}
