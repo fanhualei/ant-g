@@ -62,9 +62,10 @@ $ ant-g
 
 # 4. Change Logs
 
-* 对新生成的代码进行格式化
+## 0.9.5
 
-* 完善pageCofig 文件的自动生成
+`2020-1-2`
+* ⚡ add prettier module to prettier the code 
 
   
 

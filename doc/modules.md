@@ -15,8 +15,8 @@
 | yeoman-generator | 一个脚手架生成工具                   |
 | glob             | 使用 *等符号，来写一个规则，匹配文件 |
 | debug            |                                      |
-|                  |                                      |
-|                  |                                      |
+| prettier         | 美化代码                             |
+| execa            | 执行本地代码                         |
 
 
 
@@ -263,9 +263,51 @@ npm install ali-rds
 
 
 
+## 1.9 prettier
+
+[美化代码官方网站](https://github.com/prettier/prettier)
 
 
 
+### ① 安装
+
+```shell
+yarn add prettier --dev --exact
+# 执行命令
+prettier --write mock/activity.ts
+```
+
+
+
+### ② 代码中使用
+
+```js
+const code = fsExtra.readFileSync(this.destinationPath(`mock/${camelTableName}.ts`),'utf-8');
+const formatted  = prettier.format(code,{ semi: false, parser: "typescript" })
+fsExtra.writeFileSync(
+   this.destinationPath(`mock/${camelTableName}.ts`),
+   formatted );
+```
+
+
+
+
+
+## 1.10 execa
+
+执行本地代码
+
+[官网地址](https://www.npmjs.com/package/execa)
+
+```js
+const execa = require('execa');
+ 
+(async () => {
+    const {stdout} = await execa('echo', ['unicorns']);
+    console.log(stdout);
+    //=> 'unicorns'
+})();
+```
 
 
 
