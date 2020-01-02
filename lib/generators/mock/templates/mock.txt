@@ -7,15 +7,16 @@ let <%=camelTableName%>ListDataSource: <%=camelTableNameUF%>Item[] = [];
 
 for (let i = 1; i < 30; i += 1) {
   <%=camelTableName%>ListDataSource.push({
-      <% for(let j=0;j<fields.length;j++){ %><%=fields[j].camelColumnName%>: <%-fields[j].defaultValue%>,
+      <% for(let j=0;j<fields.length;j++){ %><%=fields[j].camelColumnName%>: <%if(fields[j].jsType==='string'){%>`<%-fields[j].camelColumnName%>-${i}`<%}else{%><%-fields[j].defaultValue%><%}%>,
       <%_ } %>
   });
-  <%=camelTableName%>ListDataSource[i - 1].id = i;
+  <%=camelTableName%>ListDataSource[i - 1].<%=primaryKey%> = i;
 }
 
 function query<%=camelTableNameUF%>ById(req: Request, res: Response) {
   const <%=primaryKey%>:number = Number(req.query.<%=primaryKey%>)
-  const result:<%=camelTableNameUF%>Item = <%=camelTableName%>ListDataSource.filter(item => item.<%=primaryKey%> === <%=primaryKey%>)[0]
+  const result:<%=camelTableNameUF%>Item = <%=camelTableName%>ListDataSource.filter(
+    item => item.<%=primaryKey%> === <%=primaryKey%>)[0];
   setTimeout(() => res.json(result), 1000);
 }
 
@@ -70,13 +71,25 @@ function query<%=camelTableNameUF%>(req: Request, res: Response, u: string) {
   let dataSource = <%=camelTableName%>ListDataSource.concat();
   const params = (parse(url, true).query as unknown) as <%=camelTableNameUF%>ListParams;
 
-  const s = params.sorter.split('_');
-  dataSource = dataSource.sort((prev, next) => {
-    if (s[1] === 'descend') {
-      return next[s[0]] - prev[s[0]];
+  if (params.sorter) {
+      const s = params.sorter.split('_');
+      dataSource = dataSource.sort((prev, next) => {
+        if (s[1] === 'descend') {
+          return next[s[0]] - prev[s[0]];
+        }
+        return prev[s[0]] - next[s[0]];
+      });
+  }
+
+  const whereKeyArr = [<% for(let j=0;j<fields.length;j++){ %>'<%=fields[j].camelColumnName%>'<% if (fields.length !== j+1){ %>, <%}%> <%_}%>];
+  const paramsKeyArr = Object.keys(params);
+  for (let i = 0; i < paramsKeyArr.length; i += 1) {
+    const key = paramsKeyArr[i];
+    if (whereKeyArr.indexOf(key) !== -1) {
+      dataSource = dataSource
+        .filter(data => data[key].indexOf(params[key]) > -1);
     }
-    return prev[s[0]] - next[s[0]];
-  });
+  }
 
   let pageSize = 10;
   if (params.pageSize) {
@@ -103,7 +116,8 @@ function deleteOne<%=camelTableNameUF%>(req: Request, res: Response) {
 
 function deleteMany<%=camelTableNameUF%>(req: Request, res: Response) {
   const { <%=primaryKey%>s } = req.body;
-  <%=camelTableName%>ListDataSource = <%=camelTableName%>ListDataSource.filter(item => !isInNumberArray(<%=primaryKey%>s, item.<%=primaryKey%>));
+  <%=camelTableName%>ListDataSource = <%=camelTableName%>ListDataSource.filter(
+    item => !isInNumberArray(<%=primaryKey%>s, item.<%=primaryKey%>));
   return res.json(1);
 }
 

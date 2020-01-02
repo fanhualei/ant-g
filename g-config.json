@@ -12,10 +12,10 @@
   },
   "mock": {
     "tableReg": "",
-    "tables": ["actionLog" ]
+    "tables": ["activity" ]
   },
   "service": {
     "tableReg": "",
-    "tables": ["actionLog" ]
+    "tables": ["activity" ]
   }
 }
