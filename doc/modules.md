@@ -291,6 +291,21 @@ fsExtra.writeFileSync(
 
 
 
+### ③ CLI方式
+
+```js
+  const execa = require('execa');
+   async prettierCode(){
+        for(let i=0; i<this.prettierArray.length; i++) {
+            const path = this.prettierArray[i];
+            const {stdout} = await execa(`prettier --write ${path}`);
+            debug(stdout);
+        }
+    }
+```
+
+
+
 
 
 ## 1.10 execa

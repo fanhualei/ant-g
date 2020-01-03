@@ -64,7 +64,7 @@ $ ant-g
 
 ## 0.9.5
 
-`2020-1-2`
+`2020-01-02`
 * ⚡ add prettier module to prettier the code 
 
   
