@@ -1,27 +1,27 @@
 import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import {
-  queryActivity,
-  deleteManyActivity,
-  deleteOneActivity,
-  updateActivity,
-} from '@/services/activityService';
+  query<%=camelTableNameUF%>,
+  deleteMany<%=camelTableNameUF%>,
+  deleteOne<%=camelTableNameUF%>,
+  update<%=camelTableNameUF%>,
+} from '@/services/<%=camelTableName%>Service';
 
-import { ActivityItem, Pagination } from '@/services/activity.d';
+import { <%=camelTableNameUF%>Item, Pagination } from '@/services/<%=camelTableName%>.d';
 
-export interface ActivityListStateType {
-  list: ActivityItem[];
+export interface <%=camelTableNameUF%>ListStateType {
+  list: <%=camelTableNameUF%>Item[];
   pagination?: Partial<Pagination>;
 }
 
 export type Effect = (
   action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: ActivityListStateType) => T) => T },
+  effects: EffectsCommandMap & { select: <T>(func: (state: <%=camelTableNameUF%>ListStateType) => T) => T },
 ) => void;
 
 export interface ModelType {
   namespace: string;
-  state: ActivityListStateType;
+  state: <%=camelTableNameUF%>ListStateType;
   effects: {
     fetch: Effect;
     deleteOne: Effect;
@@ -29,12 +29,12 @@ export interface ModelType {
     update: Effect;
   };
   reducers: {
-    save: Reducer<ActivityListStateType>;
+    save: Reducer<<%=camelTableNameUF%>ListStateType>;
   };
 }
 
 const ListModel: ModelType = {
-  namespace: 'ActivityList',
+  namespace: '<%=camelTableNameUF%>List',
   state: {
     list: [],
     pagination: {},
@@ -42,7 +42,7 @@ const ListModel: ModelType = {
 
   effects: {
     * fetch({ payload }, { call, put }) {
-      const response = yield call(queryActivity, payload);
+      const response = yield call(query<%=camelTableNameUF%>, payload);
       yield put({
         type: 'save',
         payload: response,
@@ -50,17 +50,17 @@ const ListModel: ModelType = {
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     * deleteMany({ payload, callback }, { call, put }) {
-      const response = yield call(deleteManyActivity, payload);
+      const response = yield call(deleteMany<%=camelTableNameUF%>, payload);
       if (callback) callback(response);
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     * deleteOne({ payload, callback }, { call, put }) {
-      const response = yield call(deleteOneActivity, payload);
+      const response = yield call(deleteOne<%=camelTableNameUF%>, payload);
       if (callback) callback(response);
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     * update({ payload, callback }, { call, put }) {
-      const response = yield call(updateActivity, payload);
+      const response = yield call(update<%=camelTableNameUF%>, payload);
       if (response.status && response.status !== 200) {
         if (callback) callback(0, { ...response });
         return;

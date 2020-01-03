@@ -8,57 +8,57 @@ import { PageHelp } from '@/components/Wk';
 import DataTable from './dataTable';
 import styles from './style.less';
 import EditActivity from './edit'
-import { ActivityItem, ActivityListParams } from '@/services/activity.d';
-import { defaultActivityItem } from '@/services/activityService';
+import { ActivityItem, ActivityListParams } from '@/services/<%=camelTableName%>.d';
+import { defaultActivityItem } from '@/services/<%=camelTableName%>Service';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import SearchForm from './searchForm';
 
 interface PageProps extends FormComponentProps {
   dispatch: Dispatch<
     Action<
-      | 'ActivityList/fetch'
-      | 'ActivityList/deleteOne'
-      | 'ActivityList/deleteMany'
-      | 'ActivityList/update'
+      | '<%=camelTableNameUF%>List/fetch'
+      | '<%=camelTableNameUF%>List/deleteOne'
+      | '<%=camelTableNameUF%>List/deleteMany'
+      | '<%=camelTableNameUF%>List/update'
       >
     >;
   loading: boolean;
-  ActivityList: ActivityListStateType;
+  <%=camelTableNameUF%>List: <%=camelTableNameUF%>ListStateType;
 }
 
 interface PageState {
   formValues?: { [key: string]: string };
   modalVisible: boolean;
-  currentItem: ActivityItem;
+  currentItem: <%=camelTableNameUF%>Item;
 }
 
-const defaultActivity: ActivityItem = {
-  ...defaultActivityItem,
+const default<%=camelTableNameUF%>: <%=camelTableNameUF%>Item = {
+  ...default<%=camelTableNameUF%>Item,
 }
 
 @connect(
   ({
-     ActivityList,
+     <%=camelTableNameUF%>List,
      loading,
    }: {
-    ActivityList: ActivityListStateType;
+    <%=camelTableNameUF%>List: <%=camelTableNameUF%>ListStateType;
     loading: {
       models: {
         [key: string]: boolean;
       };
     };
   }) => ({
-    ActivityList,
-    loading: loading.models.ActivityList,
+    <%=camelTableNameUF%>List,
+    loading: loading.models.<%=camelTableNameUF%>List,
   }),
 )
 
 
-class ActivityListPage extends Component <PageProps, PageState> {
+class <%=camelTableNameUF%>ListPage extends Component <PageProps, PageState> {
   state: PageState = {
     modalVisible: false,
     currentItem: {
-      ...defaultActivity,
+      ...default<%=camelTableNameUF%>,
     },
   }
 
@@ -74,7 +74,7 @@ class ActivityListPage extends Component <PageProps, PageState> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'ActivityList/fetch',
+      type: '<%=camelTableNameUF%>List/fetch',
     });
   }
 
@@ -84,12 +84,12 @@ class ActivityListPage extends Component <PageProps, PageState> {
   refreshData=() => {
     const { dispatch } = this.props;
     const { pageFromParams, pageTableParams } = this.refreshParam;
-    const params: Partial<ActivityListParams> = {
+    const params: Partial<<%=camelTableNameUF%>ListParams> = {
       ...pageFromParams,
       ...pageTableParams,
     }
     dispatch({
-      type: 'ActivityList/fetch',
+      type: '<%=camelTableNameUF%>List/fetch',
       payload: params,
     });
   }
@@ -98,7 +98,7 @@ class ActivityListPage extends Component <PageProps, PageState> {
    * 回调函数-Table-刷新数据
    * @param params
    */
-  handleTableRefresh=(params:Partial<ActivityListParams>) => {
+  handleTableRefresh=(params:Partial<<%=camelTableNameUF%>ListParams>) => {
     this.refreshParam.pageTableParams = params;
     this.refreshData();
   }
@@ -116,11 +116,11 @@ class ActivityListPage extends Component <PageProps, PageState> {
    * 回调函数-Table-删除一条记录
    * @param id
    */
-  handleTableDelOne=(activityId:number) => {
+  handleTableDelOne=(<%=primaryKey%>:number) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'ActivityList/deleteOne',
-      payload: { activityId },
+      type: '<%=camelTableNameUF%>List/deleteOne',
+      payload: { <%=primaryKey%> },
       callback: this.callbackChangeDb,
     });
   }
@@ -129,11 +129,11 @@ class ActivityListPage extends Component <PageProps, PageState> {
    * 回调函数-Table-删除多条记录
    * @param ids
    */
-  handleTableDelMany=(activityIds:string) => {
+  handleTableDelMany=(<%=primaryKey%>s:string) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'ActivityList/deleteMany',
-      payload: { activityIds },
+      type: '<%=camelTableNameUF%>List/deleteMany',
+      payload: { <%=primaryKey%>s },
       callback: this.callbackChangeDb,
     });
   }
@@ -155,14 +155,14 @@ class ActivityListPage extends Component <PageProps, PageState> {
    * @param id
    */
   handleTableGoEditPage=(id:number) => {
-    let itemToSave:ActivityItem;
+    let itemToSave:<%=camelTableNameUF%>Item;
     if (id > 0) {
-      const { ActivityList } = this.props
-      const { list } = ActivityList;
+      const { <%=camelTableNameUF%>List } = this.props
+      const { list } = <%=camelTableNameUF%>List;
       // eslint-disable-next-line prefer-destructuring
-      itemToSave = list.filter(item => item.activityId === id)[0];
+      itemToSave = list.filter(item => item.<%=primaryKey%> === id)[0];
     } else {
-      itemToSave = { ...defaultActivity };
+      itemToSave = { ...default<%=camelTableNameUF%> };
     }
 
     this.setState({
@@ -171,7 +171,7 @@ class ActivityListPage extends Component <PageProps, PageState> {
     })
   }
 
-  handleFromEdit=(clickClose:boolean, values?:Partial<ActivityItem>, callbackFromEdit?:any) => {
+  handleFromEdit=(clickClose:boolean, values?:Partial<<%=camelTableNameUF%>Item>, callbackFromEdit?:any) => {
     // 点击关闭按钮
     if (clickClose || clickClose === undefined) {
       this.setState({
@@ -185,7 +185,7 @@ class ActivityListPage extends Component <PageProps, PageState> {
     const { dispatch } = this.props;
     // 保存信息
     dispatch({
-      type: 'ActivityList/update',
+      type: '<%=camelTableNameUF%>List/update',
       payload: newValues,
       callback: (resultNum:number, errorMessage?:{}) => {
         if (resultNum > 0) {
@@ -203,13 +203,13 @@ class ActivityListPage extends Component <PageProps, PageState> {
 
 
   render() {
-    const { ActivityList } = this.props
+    const { <%=camelTableNameUF%>List } = this.props
     const { modalVisible, currentItem } = this.state
-    const activityList = ActivityList.list
-    // console.log(activityList)
+    const <%=camelTableName%>List = <%=camelTableNameUF%>List.list
+    // console.log(<%=camelTableName%>List)
     return (
       <PageHeaderWrapper>
-        <EditActivity modalVisible={modalVisible}
+        <Edit<%=camelTableNameUF%> modalVisible={modalVisible}
                       currentItem={currentItem}
                       handleFromEdit={this.handleFromEdit}
         />
@@ -219,13 +219,13 @@ class ActivityListPage extends Component <PageProps, PageState> {
         <div className={styles.tableList}>
           <Card bordered={false}>
             <SearchForm handleFormSearch={this.handleFormSearch}/>
-            <DataTable activityList={activityList}
+            <DataTable <%=camelTableName%>List={<%=camelTableName%>List}
                        loading={false}
                        handleTableRefresh={this.handleTableRefresh}
                        handleTableDelOne={this.handleTableDelOne}
                        handleTableDelMany={this.handleTableDelMany}
                        handleTableGoEditPage={this.handleTableGoEditPage}
-                       pagination={ActivityList.pagination}
+                       pagination={<%=camelTableNameUF%>List.pagination}
             />
           </Card>
         </div>
@@ -233,4 +233,4 @@ class ActivityListPage extends Component <PageProps, PageState> {
     )
   }
 }
-export default ActivityListPage;
+export default <%=camelTableNameUF%>ListPage;

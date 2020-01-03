@@ -54,6 +54,7 @@ class SearchForm extends Component<PageProps> {
     return (
       <div className={styles.tableListForm}>
         <Form onSubmit={this.handleSearch} layout="inline">
+
           <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
             <Col md={8} sm={24}>
               <FormItem label="标题">
@@ -76,6 +77,7 @@ class SearchForm extends Component<PageProps> {
               </span>
             </Col>
           </Row>
+
         </Form>
       </div>
     )
