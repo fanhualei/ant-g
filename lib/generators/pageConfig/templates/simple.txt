@@ -5,7 +5,7 @@
     "name": "<%=dataSource%>",
     "dir": "<%=dir%>",
   },
-  "title": "<%=dataSource%>",
+  "title": "<%-title%>",
   "dataSource": "<%=dataSource%>",
   "listPage": {
     "searchFields": <%-JSON.stringify(searchFields)%>,
