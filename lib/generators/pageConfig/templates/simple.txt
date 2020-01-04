@@ -3,7 +3,7 @@
   "menu": {
     "path": "<%=path%>",
     "name": "<%=dataSource%>",
-    "dir": "<%=dir%>",
+    "dir": "<%=dir%>"
   },
   "title": "<%-title%>",
   "dataSource": "<%=dataSource%>",

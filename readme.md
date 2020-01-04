@@ -65,7 +65,8 @@ $ ant-g
 ## 0.9.5
 
 `2020-01-02`
-* ⚡ add prettier module to prettier the code 
+* ⚡ add prettier module to prettier the code
+* ⚡ add generate page's code 
 
   
 
