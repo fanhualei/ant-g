@@ -7,7 +7,7 @@ export const default<%=camelTableNameUF%>Item:<%=camelTableNameUF%>Item = {
 }
 
 export async function query<%=camelTableNameUF%>ById(<%=primaryKey%>: number) {
-  return request(`<%=apiBasePath%>query<%=camelTableNameUF%>ById?<%=primaryKey%>=${<%=primaryKey%>}`);
+  return request(`<%=apiBasePath%>query<%=camelTableNameUF%>ById?<%=primaryKey%>=${<%=primaryKey%>}`,);
 }
 
 export async function query<%=camelTableNameUF%>(params: <%=camelTableNameUF%>ListParams) {

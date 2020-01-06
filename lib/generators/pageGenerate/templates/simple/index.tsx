@@ -3,13 +3,13 @@ import { FormComponentProps } from 'antd/es/form';
 import { Action, Dispatch } from 'redux';
 import { connect } from 'dva';
 import { Card } from 'antd';
-import { ActivityListStateType } from './model';
+import { <%=camelTableNameUF%>ListStateType } from './model';
 import { PageHelp } from '@/components/Wk';
 import DataTable from './dataTable';
 import styles from './style.less';
-import EditActivity from './edit'
-import { ActivityItem, ActivityListParams } from '@/services/<%=camelTableName%>.d';
-import { defaultActivityItem } from '@/services/<%=camelTableName%>Service';
+import Edit<%=camelTableNameUF%> from './edit'
+import { <%=camelTableNameUF%>Item, <%=camelTableNameUF%>ListParams } from '@/services/<%=camelTableName%>.d';
+import { default<%=camelTableNameUF%>Item } from '@/services/<%=camelTableName%>Service';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import SearchForm from './searchForm';
 

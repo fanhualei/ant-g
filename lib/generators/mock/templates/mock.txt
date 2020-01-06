@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { parse } from 'url';
-import { <%=camelTableNameUF%>Item, <%=camelTableNameUF%>ListParams } from '../src/services/<%=camelTableName%>.d';
+import { <%=camelTableNameUF%>Item, <%=camelTableNameUF%>ListParams } from '@/services/<%=camelTableName%>.d';
 import { isInNumberArray } from '@/utils/Wk/tools'
 
 let <%=camelTableName%>ListDataSource: <%=camelTableNameUF%>Item[] = [];

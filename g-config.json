@@ -12,10 +12,10 @@
   },
   "mock": {
     "tableReg": "",
-    "tables": ["activity" ]
+    "tables": ["goodsBrowse" ]
   },
   "service": {
     "tableReg": "",
-    "tables": ["activity" ]
+    "tables": ["goodsBrowse" ]
   }
 }
