@@ -7,17 +7,17 @@ import {
   Popconfirm,
 } from 'antd';
 import { ColumnProps, TableProps, TableRowSelection } from 'antd/es/table';
-import { ActivityItem, Pagination, ActivityListParams } from '@/services/activity.d';
+import { <%=camelTableNameUF%>Item, Pagination, <%=camelTableNameUF%>ListParams } from '@/services/<%=camelTableName%>.d';
 
 import { getValue } from '@/utils/Wk/tools'
 import styles from './style.less';
 
 export interface PageProps {
-  activityList:ActivityItem[];
+  <%=camelTableName%>List:<%=camelTableNameUF%>Item[];
   pagination?: Partial<Pagination>;
   loading:boolean;
 
-  handleTableRefresh?: (params:Partial<ActivityListParams>) => void;
+  handleTableRefresh?: (params:Partial<<%=camelTableNameUF%>ListParams>) => void;
   handleTableDelOne?: (id:number) => void;
   handleTableDelMany?: (ids:string) => void;
   handleTableGoEditPage?: (id:number) => void;
@@ -30,7 +30,7 @@ export interface PageProps {
  */
 interface PageState {
   selectedRowKeys: string[]|number[];
-  selectedRows: ActivityItem[];
+  selectedRows: <%=camelTableNameUF%>Item[];
 }
 
 
@@ -42,25 +42,23 @@ class DataTable extends Component<PageProps> {
 
   /**
    * 得到列的属性定义
-   * @param activityList
+   * @param <%=camelTableName%>List
    */
   getColumns=() => {
-    const columns: ColumnProps<ActivityItem>[] = [
-      {
-        title: '排序',
-        dataIndex: 'activitySort',
-      },
-      {
-        title: '标题',
-        dataIndex: 'activityTitle',
-      },
+    const columns: ColumnProps<<%=camelTableNameUF%>Item>[] = [
+      <% for(let j=0;j<listPage.gridFields.length;j++){ %>
+        {
+          title: '<%=listPage.gridFields[j]%>',
+          dataIndex: '<%=listPage.gridFields[j]%>',
+        },
+      <%}%>
       {
         title: '操作',
         render: (text, record) => (
           <Fragment>
-            <a onClick={() => this.goEditPage(record.activityId)}>编辑</a>
+            <a onClick={() => this.goEditPage(record.<%=primaryKey%>)}>编辑</a>
             <Divider type="vertical" />
-            <Popconfirm title="是否要删除此记录？" onConfirm={() => this.delOne(record.activityId)}>
+            <Popconfirm title="是否要删除此记录？" onConfirm={() => this.delOne(record.<%=primaryKey%>)}>
               <a>删除</a>
             </Popconfirm>
           </Fragment>
@@ -109,9 +107,9 @@ class DataTable extends Component<PageProps> {
    * @param selectedRowKeys
    * @param selectedRows
    */
-  handleRowSelectChange: TableRowSelection<ActivityItem>['onChange'] = (
+  handleRowSelectChange: TableRowSelection<<%=camelTableNameUF%>Item>['onChange'] = (
     selectedRowKeys,
-    selectedRows: ActivityItem[],
+    selectedRows: <%=camelTableNameUF%>Item[],
   ) => {
     this.setState({
       selectedRows,
@@ -126,7 +124,7 @@ class DataTable extends Component<PageProps> {
    * @param sorter
    * @param rest
    */
-  handleTableChange: TableProps<ActivityItem>['onChange'] = (
+  handleTableChange: TableProps<<%=camelTableNameUF%>Item>['onChange'] = (
     pagination,
     filtersArg,
     sorter,
@@ -139,7 +137,7 @@ class DataTable extends Component<PageProps> {
       return newObj;
     }, {});
 
-    const params: Partial<ActivityListParams> = {
+    const params: Partial<<%=camelTableNameUF%>ListParams> = {
       currentPage: pagination.current,
       pageSize: pagination.pageSize,
       ...filters,
@@ -190,13 +188,13 @@ class DataTable extends Component<PageProps> {
    * 刷新页面主程序
    */
   render() {
-    const { loading, pagination, activityList } = this.props;
+    const { loading, pagination, <%=camelTableName%>List } = this.props;
     const { selectedRowKeys } = this.state;
-    const rowSelection: TableRowSelection<ActivityItem> = {
+    const rowSelection: TableRowSelection<<%=camelTableNameUF%>Item> = {
       selectedRowKeys,
       onChange: this.handleRowSelectChange,
     };
-    // console.log(activityList)
+    // console.log(<%=camelTableName%>List)
 
     const paginationProps = pagination
       ? {
@@ -223,10 +221,10 @@ class DataTable extends Component<PageProps> {
         </div>
         {this.renderSimpleForm()}
         <Table
-          rowKey="activityId"
+          rowKey="<%=primaryKey%>"
           rowSelection={rowSelection}
           loading={loading}
-          dataSource={activityList}
+          dataSource={<%=camelTableName%>List}
           columns={this.getColumns()}
           pagination={paginationProps}
           onChange={this.handleTableChange}
