@@ -7,21 +7,21 @@ import {
 
 import { FormComponentProps } from 'antd/es/form';
 import React, { Component } from 'react';
-import { ActivityItem } from '@/services/activity.d';
+import { <%=camelTableNameUF%>Item } from '@/services/<%=camelTableName%>.d';
 
 const FormItem = Form.Item;
 
-interface EditActivityProps extends FormComponentProps {
+interface Edit<%=camelTableNameUF%>Props extends FormComponentProps {
   modalVisible: boolean;
-  currentItem: ActivityItem;
+  currentItem: <%=camelTableNameUF%>Item;
   handleFromEdit: (clickClose:boolean, values?:{}, callback?:any) => void;
 }
 interface PageState {
   isError:boolean;
 }
 
-class EditActivity extends Component<EditActivityProps, PageState> {
-  constructor(props: Readonly<EditActivityProps>) {
+class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props, PageState> {
+  constructor(props: Readonly<Edit<%=camelTableNameUF%>Props>) {
     super(props);
     this.state = {
       isError: false,
@@ -93,22 +93,23 @@ class EditActivity extends Component<EditActivityProps, PageState> {
     const { form, modalVisible, currentItem } = this.props;
     return (
       <Modal
-        title={this.getTitle(currentItem.activityId)}
+        title={this.getTitle(currentItem.<%=primaryKey%>)}
         visible={modalVisible}
         onOk={this.okHandle}
         onCancel={this.handleClose}
         destroyOnClose
       >
         {this.showError()}
-        <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="类型名称">
-          {form.getFieldDecorator('activityTitle', {
-            initialValue: currentItem.activityTitle,
-            rules: [{ required: true, message: '请输入至少五个字符！', min: 5 }],
+        <% for(let j=0;j<editPage.editFields.length;j++){ %>
+          <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="<%=editPage.editFields[j]%>">
+          {form.getFieldDecorator('<%=editPage.editFields[j]%>', {
+            initialValue: currentItem.<%=editPage.editFields[j]%>
           })(<Input placeholder="请输入"/>)}
-        </FormItem>
+          </FormItem>
+        <%}%>
       </Modal>
     );
   }
 }
 
-export default Form.create<EditActivityProps>()(EditActivity);
+export default Form.create<Edit<%=camelTableNameUF%>Props>()(Edit<%=camelTableNameUF%>);
