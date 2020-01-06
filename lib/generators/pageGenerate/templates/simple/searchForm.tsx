@@ -54,30 +54,28 @@ class SearchForm extends Component<PageProps> {
     return (
       <div className={styles.tableListForm}>
         <Form onSubmit={this.handleSearch} layout="inline">
-
-          <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-            <Col md={8} sm={24}>
-              <FormItem label="标题">
-                {getFieldDecorator('activityTitle')(<Input placeholder="请输入" allowClear />)}
-              </FormItem>
-            </Col>
-            <Col md={8} sm={24}>
-              <FormItem label="排序">
-                {getFieldDecorator('activityBanner')(<Input placeholder="请输入" allowClear />)}
-              </FormItem>
-            </Col>
-            <Col md={8} sm={24}>
-              <span className={styles.submitButtons}>
-                <Button type="primary" htmlType="submit">
-                  查询
-                </Button>
-                <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
-                  重置
-                </Button>
-              </span>
-            </Col>
-          </Row>
-
+          <% for(let j=0;j<=listPage.searchFields.length;j++){ %>
+            <%if(j%3===0){%> <Row gutter={{ md: 8, lg: 24, xl: 48 }}> <%}%>
+              <%if(j<listPage.searchFields.length){%>
+                <Col md={8} sm={24}>
+                  <FormItem label="<%=listPage.searchFields[j]%>">
+                    {getFieldDecorator('<%=listPage.searchFields[j]%>')(<Input placeholder="请输入" allowClear />)}
+                  </FormItem>
+                </Col>
+              <%}else{%>
+                <Col md={8} sm={24}>
+                  <span className={styles.submitButtons}>
+                    <Button type="primary" htmlType="submit">
+                      查询
+                    </Button>
+                    <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset}>
+                      重置
+                    </Button>
+                  </span>
+                </Col>
+              <%}%>
+            <%if(j%3===2 || j===listPage.searchFields.length ){%> </Row> <%}%>
+          <%}%>
         </Form>
       </div>
     )
