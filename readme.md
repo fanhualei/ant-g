@@ -61,7 +61,7 @@ $ ant-g
 
 # 4. Change Logs
 
-## 0.9.5
+## 0.9.6
 
 `2020-01-02`
 * ⚡ add prettier module to prettier the code
