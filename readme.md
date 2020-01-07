@@ -4,10 +4,9 @@ Generate `service`   `mock`   ` page` according to the table of the database
 
 - [x] generate service
 - [x] generate  mock
-- [ ] generate  Page
+- [x] generate  Page
+- [x] auto modify menu and route
 - [ ] generate   test
-- [ ] auto modify menu 
-
 
 
 # 1. Install

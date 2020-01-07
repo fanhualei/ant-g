@@ -17,6 +17,8 @@
 | debug            |                                      |
 | prettier         | 美化代码                             |
 | execa            | 执行本地代码                         |
+| babel            |                                      |
+|                  |                                      |
 
 
 
