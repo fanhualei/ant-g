@@ -213,6 +213,12 @@ export default {
               component: './goodsBrowse',
             },
             {
+              name: 'article',
+              icon: 'smile',
+              path: '/article',
+              component: './article',
+            },
+            {
               component: './404',
             },
           ],

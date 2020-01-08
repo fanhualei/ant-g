@@ -51,7 +51,7 @@ $ ant-g
 
 ```
 
-
+[detail  manual-cn](doc/manual-cn.md)
 
 # 3. FAQ
 
