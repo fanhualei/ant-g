@@ -7,7 +7,7 @@
     "user": "<%=user%>",
     "password": "<%=password%>",
     "database": "<%=database%>",
-    "port": 3306,
+    "port": <%=port%>,
     "tablePrefix": "<%=tablePrefix%>"
   },
   "mock": {
