@@ -61,11 +61,19 @@ $ ant-g
 
 # 4. Change Logs
 
+
+## 0.9.7
+
+`2020-01-10`
+* ⚡ Added the function of configuring MySQL
+* ⚡ Added shortcut command
+
+
 ## 0.9.6
 
 `2020-01-02`
-* ⚡ add prettier module to prettier the code
-* ⚡ add generate page's code 
+* ⚡ Add prettier module to prettier the code
+* ⚡ Add generate page's code 
 
   
 

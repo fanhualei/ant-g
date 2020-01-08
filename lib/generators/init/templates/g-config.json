@@ -3,19 +3,19 @@
     "apiBasePath": "/api/shop/"
   },
   "db": {
-    "host": "192.168.1.179",
-    "user": "root",
-    "password": "rootmysql",
-    "database": "phoenix",
+    "host": "<%=host%>",
+    "user": "<%=user%>",
+    "password": "<%=password%>",
+    "database": "<%=database%>",
     "port": 3306,
-    "tablePrefix": "as_"
+    "tablePrefix": "<%=tablePrefix%>"
   },
   "mock": {
     "tableReg": "",
-    "tables": ["actionLog" ]
+    "tables": []
   },
   "service": {
     "tableReg": "",
-    "tables": ["actionLog" ]
+    "tables": []
   }
 }
