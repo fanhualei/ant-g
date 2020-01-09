@@ -1,6 +1,6 @@
 {
   "name": "ant-g",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "description": "antDesignPro辅助代码生成器",
   "bin": {
     "ant-g": "cli.js"
