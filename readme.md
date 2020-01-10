@@ -57,9 +57,52 @@ $ ant-g
 
 
 
+## 3.1 mysql connect
+
+
+
+### 08004 error
+
+error message
+
+```
+Client does not support authentication protocol requested by server; consider upgrading MySQL client
+```
+
+
+
+The reason is that the initial password of the database is not configured. Execute the following command on the MySQL command line:
+
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your password';
+SELECT plugin FROM mysql.user WHERE User = 'root';
+```
+
+
+
+
+
+
+
 
 
 # 4. Change Logs
+
+
+## 0.9.9
+
+`2020-01-16`
+
+* simple page template
+    * ⚡ Promote  display and edit form by data type.
+    
+
+
+
+## 0.9.8
+
+`2020-01-10`
+* 🐞 fix searchForm.less missed bug.
 
 
 ## 0.9.7

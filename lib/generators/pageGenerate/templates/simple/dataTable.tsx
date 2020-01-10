@@ -6,6 +6,7 @@ import {
   Alert,
   Popconfirm,
 } from 'antd';
+<%-ejsGetMomentImport(listPage.gridFields,fields)%>
 import { ColumnProps, TableProps, TableRowSelection } from 'antd/es/table';
 import { <%=camelTableNameUF%>Item, Pagination, <%=camelTableNameUF%>ListParams } from '@/services/<%=camelTableName%>.d';
 
@@ -44,12 +45,15 @@ class DataTable extends Component<PageProps> {
    * 得到列的属性定义
    * @param <%=camelTableName%>List
    */
+
+
   getColumns=() => {
     const columns: ColumnProps<<%=camelTableNameUF%>Item>[] = [
       <% for(let j=0;j<listPage.gridFields.length;j++){ %>
         {
           title: '<%=listPage.gridFields[j]%>',
           dataIndex: '<%=listPage.gridFields[j]%>',
+          <%-ejsGetGridRender(listPage.gridFields[j],fields)%>
         },
       <%}%>
       {
