@@ -4,7 +4,7 @@ import {
   Col,
   Form,
   Input,
-  Row,
+  Row,<%-ejsGetSearchAntImport(listPage.searchFields,fields)%>
 } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import styles from '@/utils/Wk/searchForm.less';
@@ -59,7 +59,9 @@ class SearchForm extends Component<PageProps> {
               <%if(j<listPage.searchFields.length){%>
                 <Col md={8} sm={24}>
                   <FormItem label="<%=listPage.searchFields[j]%>">
-                    {getFieldDecorator('<%=listPage.searchFields[j]%>')(<Input placeholder="请输入" allowClear />)}
+                    {getFieldDecorator('<%=listPage.searchFields[j]%>')
+                      (<%-ejsGetSearchFormItem(listPage.searchFields[j],fields)%>)
+                    }
                   </FormItem>
                 </Col>
               <%}else{%>
