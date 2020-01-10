@@ -4,7 +4,7 @@ import {
   Col,
   Form,
   Input,
-  Row,<%-ejsGetSearchAntImport(listPage.searchFields,fields)%>
+  Row,<%-ejsGetAntImport(listPage.searchFields,fields)%>
 } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import styles from '@/utils/Wk/searchForm.less';

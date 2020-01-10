@@ -2,9 +2,9 @@ import {
   Form,
   Input,
   Modal,
-  Alert,
+  Alert,<%-ejsGetAntImport(editPage.editFields,fields)%>
 } from 'antd';
-
+<%-ejsGetMomentImport(editPage.editFields,fields)%>
 import { FormComponentProps } from 'antd/es/form';
 import React, { Component } from 'react';
 import { <%=camelTableNameUF%>Item } from '@/services/<%=camelTableName%>.d';
@@ -104,7 +104,7 @@ class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props
           <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="<%=editPage.editFields[j]%>">
           {form.getFieldDecorator('<%=editPage.editFields[j]%>', {
             initialValue: currentItem.<%=editPage.editFields[j]%>
-          })(<Input placeholder="请输入"/>)}
+          })(<%-ejsGetEditFormItem(editPage.editFields[j],fields)%>)}
           </FormItem>
         <%}%>
       </Modal>
