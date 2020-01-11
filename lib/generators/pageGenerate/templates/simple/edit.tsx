@@ -107,9 +107,7 @@ class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props
       >
           {this.showError()}
           <% for(let j=0;j<editPage.editFields.length;j++){ %>
-            <FormItem {...this.formLayout} key="<%=editPage.editFields[j]%>"  label="<%=editPage.editFields[j]%>">
               <%-ejsGetEditFormItem(editPage.editFields[j],fields)%>
-            </FormItem>
           <%}%>
       </Modal>
     );
