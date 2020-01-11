@@ -72,6 +72,31 @@ ant-g --type=init
 
 
 
+下面给出了一个例子的SQL语句
+
+```sql
+create table as_activity
+(
+    activity_id         mediumint auto_increment comment '活动编号'  primary key,
+    activity_title      varchar(255)                    not null comment '活动标题',
+    activity_type       enum ('1', '2')                 null comment '活动类型^^1:商品 2:团购',
+    activity_banner     varchar(255)                    not null comment '活动图片^^活动横幅大图片',
+    activity_style      varchar(255)                    not null comment '活动模板^^活动页面模板样式标识码',
+    activity_desc       varchar(1000)                   not null comment '活动描述',
+    activity_start_date datetime                        not null comment '开始时间',
+    activity_end_date   datetime                        not null comment '结束时间',
+    activity_sort       tinyint(2) unsigned default 255 not null comment '排序',
+    activity_state      tinyint(2) unsigned default 1   not null comment '活动状态^^0为关闭 1为开启'
+)
+    comment '活动' engine = InnoDB;
+```
+
+
+
+
+
+
+
 # 3. 下载数据库结构
 
 将数据库结构保存到本地，这样就不用每次都连接数据库了。

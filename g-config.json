@@ -8,7 +8,8 @@
     "password": "rootmysql",
     "database": "phoenix",
     "port": 3306,
-    "tablePrefix": "as_"
+    "tablePrefix": "as_",
+    "parseComment": true
   },
   "mock": {
     "tableReg": "",
