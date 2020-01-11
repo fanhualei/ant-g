@@ -28,6 +28,11 @@ class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props
     }
   }
 
+  formLayout = {
+    labelCol: { span: 7 },
+    wrapperCol: { span: 13 },
+  };
+
   /**
    * 保存后的回调函数
    * @param resultNum
@@ -98,13 +103,14 @@ class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props
         onOk={this.okHandle}
         onCancel={this.handleClose}
         destroyOnClose
+        width={720}
       >
-        {this.showError()}
-        <% for(let j=0;j<editPage.editFields.length;j++){ %>
-          <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="<%=editPage.editFields[j]%>">
-            <%-ejsGetEditFormItem(editPage.editFields[j],fields)%>
-          </FormItem>
-        <%}%>
+          {this.showError()}
+          <% for(let j=0;j<editPage.editFields.length;j++){ %>
+            <FormItem {...this.formLayout} key="<%=editPage.editFields[j]%>"  label="<%=editPage.editFields[j]%>">
+              <%-ejsGetEditFormItem(editPage.editFields[j],fields)%>
+            </FormItem>
+          <%}%>
       </Modal>
     );
   }
