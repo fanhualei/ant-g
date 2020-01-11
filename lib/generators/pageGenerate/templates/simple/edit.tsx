@@ -61,9 +61,9 @@ class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props
    * 根据id得到页面的title,新增或者编辑
    */
   getTitle = (id:number): string => {
-    let title: string = '编辑帮助类型';
+    let title: string = '编辑<%=camelTableNameUF%>';
     if (!id && id === 0) {
-      title = '新增帮助类型';
+      title = '新增<%=camelTableNameUF%>';
     }
     return title;
   }
@@ -102,9 +102,7 @@ class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props
         {this.showError()}
         <% for(let j=0;j<editPage.editFields.length;j++){ %>
           <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="<%=editPage.editFields[j]%>">
-          {form.getFieldDecorator('<%=editPage.editFields[j]%>', {
-            initialValue: currentItem.<%=editPage.editFields[j]%>
-          })(<%-ejsGetEditFormItem(editPage.editFields[j],fields)%>)}
+            <%-ejsGetEditFormItem(editPage.editFields[j],fields)%>
           </FormItem>
         <%}%>
       </Modal>
