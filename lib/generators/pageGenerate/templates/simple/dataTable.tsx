@@ -43,10 +43,7 @@ class DataTable extends Component<PageProps> {
 
   /**
    * 得到列的属性定义
-   * @param <%=camelTableName%>List
    */
-
-
   getColumns=() => {
     const columns: ColumnProps<<%=camelTableNameUF%>Item>[] = [
       <% for(let j=0;j<listPage.gridFields.length;j++){ %>
