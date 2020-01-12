@@ -58,11 +58,7 @@ class SearchForm extends Component<PageProps> {
             <%if(j%3===0){%> <Row gutter={{ md: 8, lg: 24, xl: 48 }}> <%}%>
               <%if(j<listPage.searchFields.length){%>
                 <Col md={8} sm={24}>
-                  <FormItem label="<%=listPage.searchFields[j]%>">
-                    {getFieldDecorator('<%=listPage.searchFields[j]%>')
-                      (<%-ejsGetSearchFormItem(listPage.searchFields[j],fields)%>)
-                    }
-                  </FormItem>
+                  <%-ejsGetSearchFormItem(listPage.searchFields[j],fields)%>
                 </Col>
               <%}else{%>
                 <Col md={8} sm={24}>
