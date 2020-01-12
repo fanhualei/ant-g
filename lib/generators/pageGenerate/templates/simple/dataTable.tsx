@@ -51,9 +51,7 @@ class DataTable extends Component<PageProps> {
     const columns: ColumnProps<<%=camelTableNameUF%>Item>[] = [
       <% for(let j=0;j<listPage.gridFields.length;j++){ %>
         {
-          title: '<%=listPage.gridFields[j]%>',
-          dataIndex: '<%=listPage.gridFields[j]%>',
-          <%-ejsGetGridRender(listPage.gridFields[j],fields)%>
+          <%-ejsGetGridColumn(listPage.gridFields[j],fields)%>
         },
       <%}%>
       {
