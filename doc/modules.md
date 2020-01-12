@@ -509,6 +509,19 @@ http.createServer(function(req,res){
 
 
 
+## 2.6 ffmpeg
+
+[提高视频速度](https://jingyan.baidu.com/article/cd4c29795564c1756e6e6099.html)
+
+提高两倍速
+
+```shell	
+ffmpeg -i b.mp4 -vf setpts=PTS/2 -af atempo=2 c.mp4
+ffmpeg -i a.flv -vf setpts=PTS/2 -af atempo=2 d.mp4
+```
+
+
+
 
 
 # 3 参考文章
