@@ -21,17 +21,17 @@ interface PageState {
 }
 
 class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props, PageState> {
+    formLayout = {
+      labelCol: { span: 7 },
+      wrapperCol: { span: 13 },
+    };
+
   constructor(props: Readonly<Edit<%=camelTableNameUF%>Props>) {
     super(props);
     this.state = {
       isError: false,
     }
   }
-
-  formLayout = {
-    labelCol: { span: 7 },
-    wrapperCol: { span: 13 },
-  };
 
   /**
    * 保存后的回调函数
