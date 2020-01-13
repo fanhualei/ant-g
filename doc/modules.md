@@ -328,7 +328,7 @@ const execa = require('execa');
 
 
 
-①②③④⑤⑥⑦⑧⑨
+
 
 
 
@@ -522,7 +522,89 @@ ffmpeg -i a.flv -vf setpts=PTS/2 -af atempo=2 d.mp4
 
 
 
+## 2.7 babel
 
+### ① 简介
+
+[Babel](https://links.jianshu.com/go?to=https%3A%2F%2Fgithub.com%2Fbabel%2Fbabel) 是一款将未来的 JavaScript 语法编译成过去语法的 Node.js 工具。
+
+
+
+> 源码转换工作分为3个步骤：
+
+```
+      parsing      transforming               generation
+String -------> AST ------------> modified AST ----------> String
+```
+
+
+
+> 有四个包可以使用：
+
+```js
+const parser = require('@babel/parser');
+const {default: traverse} = require('@babel/traverse');
+const {default:generate} = require('@babel/generator');
+const t = require('@babel/types');
+```
+
+- @babel/core：以编程方式来使用Babel（不以CLI方式）
+- @babel/parser：解析输入源码，创建AST
+- @babel/traverse：遍历操作AST
+- @babel/generator：把AST转回JS代码
+
+
+
+### ② 参考文档
+
+* 推荐
+  * [Babel快速指南*推荐](https://cloud.tencent.com/developer/article/1444654)
+  * [AST--使用编译的方式修改代码](https://blog.csdn.net/qq_36571602/article/details/103533029)
+  * [模拟器](https://astexplorer.net/)
+  * [官网地址](https://babeljs.io/)
+* 一般推荐
+  * [Babel 的工程化实现](https://www.jianshu.com/p/051dc6c27272)
+  * [使用 Babel 进行抽象语法树操作](https://www.imooc.com/article/289744)
+
+
+
+### ③ traverse使用详解
+
+官方文档： https://babeljs.io/docs/en/babel-traverse
+
+有两种遍历方法
+
+```js
+traverse(ast, {
+  enter(path) {
+    if (path.isIdentifier({ name: "n" })) {
+      path.node.name = "x";
+    }
+  }
+});
+```
+
+```js
+traverse(ast, {
+    FunctionDeclaration: function(path) {
+             path.node.id.name = "x";
+    }
+})
+```
+
+这里推荐使用第二种，因为antDesignPro使用了第二种。
+
+
+
+
+
+
+
+
+
+
+
+①②③④⑤⑥⑦⑧⑨
 
 # 3 参考文章
 
