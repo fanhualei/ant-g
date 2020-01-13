@@ -89,15 +89,20 @@ SELECT plugin FROM mysql.user WHERE User = 'root';
 # 4. Change Logs
 
 
-## 0.9.9
+## 0.9.10
 
 `2020-01-16`
+
+* 🐞 fix searchForm date bug.
+
+
+## 0.9.9
+
+`2020-01-13`
 
 * simple page template
     * ⚡ Promote  display and edit form by data type.
     
-
-
 
 ## 0.9.8
 
