@@ -41,7 +41,7 @@ Execute command in the folder: `ant-g`
 $ ant-g
 ? Select the boilerplate type (Use arrow keys)
 > init                      - Create g-config.json config file for generator
-  initDataStructure         - Create data structure file from database, this file save /.g
+  dataStructure             - Create data structure file from database, this file save /.g
   dependencies              - Add dependencies to the project
   service                   - Create service and data.d from db
   mock                      - Create mock from db
@@ -94,6 +94,7 @@ SELECT plugin FROM mysql.user WHERE User = 'root';
 `2020-01-16`
 
 * 🐞 fix searchForm date bug.
+* ⚡  display the field tile from filed columnComment.
 
 
 ## 0.9.9
