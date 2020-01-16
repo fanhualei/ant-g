@@ -66,9 +66,9 @@ class Edit<%=camelTableNameUF%> extends Component<Edit<%=camelTableNameUF%>Props
    * 根据id得到页面的title,新增或者编辑
    */
   getTitle = (id:number): string => {
-    let title: string = '编辑<%=camelTableNameUF%>';
+    let title: string = '编辑<%=title%>';
     if (!id && id === 0) {
-      title = '新增<%=camelTableNameUF%>';
+      title = '新增<%=title%>';
     }
     return title;
   }
